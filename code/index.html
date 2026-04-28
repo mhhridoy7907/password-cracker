@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Animated Brute-Force Password Demo</title>
+<style>
+:root{--bg:#0f0f0f;--card:#121212;--accent:#00ff88;--muted:#6b6b6b;--good:#10b981;--bad:#ff0044;}
+body{margin:0;padding:0;background:#0a0a0a;font-family:'Courier New',monospace;color:#0ff;display:flex;flex-direction:column;align-items:center;}
+h1{text-align:center;font-size:2rem;margin:20px;text-shadow:0 0 10px #0ff;}
+.wrap{max-width:900px;margin:10px auto;padding:20px;border:2px dashed #0ff;border-radius:12px;}
+label{display:block;margin-top:12px;}
+input[type=password]{width:100%;padding:10px;margin-top:6px;background:#111;border:1px solid #0ff;color:#0ff;border-radius:6px;}
+button{margin-top:10px;padding:8px 12px;background:#0ff;border:none;color:#000;font-weight:bold;cursor:pointer;border-radius:6px;}
+.meter{height:14px;background:#111;border:1px solid #0ff;border-radius:12px;margin-top:8px;overflow:hidden;position:relative;}
+.meter>i{display:block;height:100%;width:0;background:#0f0;transition:width .25s;}
+.unlock{position:absolute;top:-25px;left:0;color:#0f0;font-weight:bold;opacity:0;transition:all 0.5s ease;}
+#finalMessage{font-size:2rem;font-weight:bold;color:#ff0000;text-align:center;margin:10px 0;text-shadow:0 0 20px #ff0000,0 0 40px #ff0000;animation:pulse 1s infinite alternate;}
+@keyframes pulse{0%{text-shadow:0 0 20px #ff0000,0 0 40px #ff0000;transform:scale(1);}50%{text-shadow:0 0 40px #ff0000,0 0 60px #ff0000;transform:scale(1.1);}100%{text-shadow:0 0 20px #ff0000,0 0 40px #ff0000;transform:scale(1);}}
+#console{width:90%;max-width:800px;height:200px;background:rgba(0,0,0,0.9);border:3px solid #00ff00;padding:10px;overflow-y:auto;font-size:1rem;line-height:1.2rem;}
+.line{white-space:pre;}
+.progress-bar{width:90%;max-width:800px;height:20px;background:#111;border:2px solid #00ff00;margin-top:10px;border-radius:10px;overflow:hidden;}
+.progress{height:100%;width:0%;background:linear-gradient(90deg,#0f0,#f00);transition:width 0.1s linear;}
+</style>
+</head>
+<body>
+
+<h1>Strong passwords stop brute-force attacks</h1>
+
+<div class="wrap">
+  <label>Enter password:</label>
+  <input id="pwd" type="password" placeholder="Try: 123456, password, Hridoy@2025!" />
+  <div class="meter"><i id="bar"></i><div id="unlock" class="unlock">UNLOCKED!</div></div>
+  <div class="info">Strength: <span id="strength">—</span> | Entropy: <span id="entropy">—</span> bits | Crack time: <span id="crack">—</span></div>
+  <button id="toggle">Show/Hide</button>
+  <button id="generate">Generate Strong</button>
+  <button id="clear">Clear</button>
+  <button id="okBtn">OK</button>
+</div>
+
+<!-- Final message -->
+<div id="finalMessage"></div>
+
+<div id="console"></div>
+<div class="progress-bar"><div class="progress" id="progress"></div></div>
+
+<script src="ff.js"></script>
+
+</body>
+</html>
